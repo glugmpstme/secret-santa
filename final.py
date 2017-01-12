@@ -29,9 +29,11 @@ for num in range(0,sop):
 				lucky=random.randint(0,sol)
 				if people[num] != lot[lucky]:
 					break
-		os.system('clear')
+		
 		print "You are the secret santa of %s"% lot[lucky]
 		time.sleep(5)
+		os.system('clear')
 		lot.pop(lucky)
 		checkrdy ='n'
 		sol=sol-1
+		sop=sop-1
