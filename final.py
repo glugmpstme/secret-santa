@@ -1,7 +1,8 @@
 import random 
 import os
+import time
 check='y'
-i=0
+checkrdy ='n'
 people=[]
 while check == 'y':
 	print "Hello, welcome to Secret Santa.Enter the names of the people, reply N when you want to stop to,\"Are there more people?\""
@@ -13,19 +14,24 @@ lot=people[:]
 sop=len(people)
 sol=len(lot)
 sol=sol-1
-sop=sop-1
+sop=sop
 for num in range(0,sop):
-	print "Hello %s, Are you ready to see the name of the person? Your screen will self-destruct in 10 seconds."% people[num]
-	print people
-	if sol== 1:
-		lucky=0
+	if sop/2 != 0 and sol+1==1:
+		print "Hey we're sorry but the pool is already divided, better luck next time %s!"% people[num]
 	else:
-		while True:
-			lucky=random.randint(0,sol)
-			if people[num] == lot[lucky]:
-				break
-	print "You are the secret santa of %s"% lot[lucky]
-	print people
-	lot.pop(lucky)
-
-	sol=sol-1
+		while checkrdy == 'n':
+			print "Hello %s, Are you ready to see the name of the person? Your screen will self-destruct in 5 seconds. Enter Y to see the name of the person"% people[num]
+			checkrdy=raw_input()
+		if sol+1 == 1:
+			lucky=0
+		else:
+			while True:
+				lucky=random.randint(0,sol)
+				if people[num] != lot[lucky]:
+					break
+		os.system('clear')
+		print "You are the secret santa of %s"% lot[lucky]
+		time.sleep(5)
+		lot.pop(lucky)
+		checkrdy ='n'
+		sol=sol-1
